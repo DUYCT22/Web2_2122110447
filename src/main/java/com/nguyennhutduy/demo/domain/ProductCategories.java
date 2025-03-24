@@ -8,15 +8,17 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Cart")
-public class Cart {
-
+@Table(name = "ProductCategories")
+public class ProductCategories {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(nullable = false, unique = false)
-    private int userId;
+    private int categoryId;
+
+    @Column(nullable = false, unique = false)
+    private int productId;
 
     public int getId() {
         return id;
@@ -26,12 +28,20 @@ public class Cart {
         this.id = id;
     }
 
-    public int getUserId() {
-        return userId;
+    public int getCategoryId() {
+        return categoryId;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public int getProductId() {
+        return productId;
+    }
+
+    public void setProductId(int productId) {
+        this.productId = productId;
     }
 
 }
