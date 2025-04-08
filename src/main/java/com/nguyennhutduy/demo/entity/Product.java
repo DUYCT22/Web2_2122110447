@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
@@ -26,14 +28,12 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category category;
+
     @Column(nullable = false, unique = true)
     public String name;
-
-    @Column(nullable = false, unique = false)
-    public char size;
-
-    @Column(nullable = false, unique = false)
-    public String color;
 
     @Column(nullable = false, unique = false)
     public String detail;
@@ -42,16 +42,7 @@ public class Product {
     public String slug;
 
     @Column(nullable = false, unique = false)
-    public double importPrice;
-
-    @Column(nullable = false, unique = false)
     public double sellingPrice;
-
-    @Column(nullable = false, unique = false)
-    public double discountPrice;
-
-    @Column(nullable = false, unique = false)
-    public int quantity;
 
     @Column(nullable = false, unique = false)
     public int sold;

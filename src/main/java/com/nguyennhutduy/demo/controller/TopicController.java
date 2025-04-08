@@ -27,42 +27,67 @@ public class TopicController {
     // Create Topic
     // http://localhost:8081/api/topics
     @PostMapping
-    public ResponseEntity<Topic> createTopic(@RequestBody Topic topic) {
-        Topic savedTopic = topicService.createTopic(topic);
-        return ResponseEntity.status(HttpStatus.CREATED).body(savedTopic);
+    public ResponseEntity<?> createTopic(@RequestBody Topic topic) {
+        try {
+            Topic savedTopic = topicService.createTopic(topic);
+            return ResponseEntity.status(HttpStatus.CREATED).body(savedTopic);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("error: " + ex.getMessage());
+        }
     }
 
     // Get Topic by ID
     // http://localhost:8081/api/topics/{id}
     @GetMapping("{id}")
-    public ResponseEntity<Topic> getTopicById(@PathVariable("id") Long topicId) {
-        Topic topic = topicService.getTopicById(topicId);
-        return ResponseEntity.ok(topic);
+    public ResponseEntity<?> getTopicById(@PathVariable("id") Long topicId) {
+        try {
+            Topic topic = topicService.getTopicById(topicId);
+            return ResponseEntity.ok(topic);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("error: " + ex.getMessage());
+        }
     }
 
     // Get All Topics
     // http://localhost:8081/api/topics/
     @GetMapping
-    public ResponseEntity<List<Topic>> getAllTopic() {
-        List<Topic> topics = topicService.getAllTopic();
-        return ResponseEntity.ok(topics);
+    public ResponseEntity<?> getAllTopic() {
+        try {
+            List<Topic> topics = topicService.getAllTopic();
+            return ResponseEntity.ok(topics);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("error: " + ex.getMessage());
+        }
     }
 
     // Update Topic
     // http://localhost:8081/api/topics/{id}
     @PutMapping("{id}")
-    public ResponseEntity<Topic> updateTopic(@PathVariable("id") Long topicId,
+    public ResponseEntity<?> updateTopic(@PathVariable("id") Long topicId,
             @RequestBody Topic topic) {
-        topic.setId(topicId);
-        Topic updatedTopic = topicService.updateTopic(topic);
-        return ResponseEntity.ok(updatedTopic);
+        try {
+            topic.setId(topicId);
+            Topic updatedTopic = topicService.updateTopic(topic);
+            return ResponseEntity.ok(updatedTopic);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("error: " + ex.getMessage());
+        }
     }
 
     // Delete Topic
     // http://localhost:8081/api/topics/
     @DeleteMapping("{id}")
     public ResponseEntity<String> deleteCategory(@PathVariable("id") Long topicId) {
-        topicService.deleteTopic(topicId);
-        return ResponseEntity.ok("Topic successfully deleted!");
+        try {
+            topicService.deleteTopic(topicId);
+            return ResponseEntity.ok("Topic successfully deleted!");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("error: " + ex.getMessage());
+        }
     }
 }

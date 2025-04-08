@@ -13,78 +13,78 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nguyennhutduy.demo.entity.Category;
-import com.nguyennhutduy.demo.service.CategoryService;
+import com.nguyennhutduy.demo.entity.CartItems;
+import com.nguyennhutduy.demo.service.CartItemsService;
 
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("api/categories")
+@RequestMapping("api/cartItems")
 @RequiredArgsConstructor
-public class CategoryController {
-    private final CategoryService categoryService;
+public class CartItemsController {
+    private final CartItemsService cartItemsService;
 
-    // Create Category
-    // http://localhost:8081/api/categories
+    // Create CartItems
+    // http://localhost:8081/api/cartItems
     @PostMapping
-    public ResponseEntity<?> createBrand(@RequestBody Category category) {
+    public ResponseEntity<?> createCartItem(@RequestBody CartItems cartItem) {
         try {
-            Category savedCategory = categoryService.createCategory(category);
-            return ResponseEntity.status(HttpStatus.CREATED).body(savedCategory);
+            CartItems savedCartItem = cartItemsService.createCartItem(cartItem);
+            return ResponseEntity.status(HttpStatus.CREATED).body(savedCartItem);
         } catch (Exception ex) {
             ex.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("error: " + ex.getMessage());
         }
     }
 
-    // Get Category by ID
-    // http://localhost:8081/api/categories/{id}
+    // Get CartItem by ID
+    // http://localhost:8081/api/cartItems/
     @GetMapping("{id}")
-    public ResponseEntity<?> getCategoryById(@PathVariable("id") Long categoryId) {
+    public ResponseEntity<?> getCartItemById(@PathVariable("id") Long CartItemId) {
         try {
-            Category category = categoryService.getCategoryById(categoryId);
-            return ResponseEntity.ok(category);
+            CartItems cartItem = cartItemsService.getCartItemById(CartItemId);
+            return ResponseEntity.ok(cartItem);
         } catch (Exception ex) {
             ex.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("error: " + ex.getMessage());
         }
     }
 
-    // Get All Categories
-    // http://localhost:8081/api/categories/
+    // Get All CartItems
+    // http://localhost:8081/api/cartItems/
     @GetMapping
-    public ResponseEntity<?> getAllCategory() {
+    public ResponseEntity<?> getAllCartItems() {
         try {
-            List<Category> categories = categoryService.getAllCategory();
-            return ResponseEntity.ok(categories);
+            List<CartItems> cartItems = cartItemsService.getAllCartItems();
+            return ResponseEntity.ok(cartItems);
         } catch (Exception ex) {
             ex.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("error: " + ex.getMessage());
         }
     }
 
-    // Update Category
-    // http://localhost:8081/api/categories/{id}
+    // Update CartItems
+    // http://localhost:8081/api/cartItems/
     @PutMapping("{id}")
-    public ResponseEntity<?> updateCategory(@PathVariable("id") Long categoryId,
-            @RequestBody Category category) {
+    public ResponseEntity<?> updateCartItem(@PathVariable("id") Long cartItemId,
+            @RequestBody CartItems cartItem) {
         try {
-            category.setId(categoryId);
-            Category updatedCategory = categoryService.updateCategory(category);
-            return ResponseEntity.ok(updatedCategory);
+            cartItem.setId(cartItemId);
+            CartItems updatedCartItem = cartItemsService.updateCartItem(cartItem);
+            return ResponseEntity.ok(updatedCartItem);
         } catch (Exception ex) {
             ex.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("error: " + ex.getMessage());
         }
     }
 
-    // Delete Category
-    // http://localhost:8081/api/categories/
+    // Delete CartItems
+    // http://localhost:8081/api/cartItems/
     @DeleteMapping("{id}")
-    public ResponseEntity<String> deleteCategory(@PathVariable("id") Long categoryId) {
+    public ResponseEntity<String> deleteCartItem(@PathVariable("id") Long cartItemId) {
         try {
-            categoryService.deleteCategory(categoryId);
-            return ResponseEntity.ok("Category successfully deleted!");
+            cartItemsService.deleteCartItem(cartItemId);
+            return ResponseEntity.ok("CartItem successfully deleted!");
         } catch (Exception ex) {
             ex.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("error: " + ex.getMessage());

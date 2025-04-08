@@ -1,6 +1,5 @@
 package com.nguyennhutduy.demo.entity;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,16 +15,11 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "voucherBrands")
-public class VoucherBrands {
+@Table(name = "size")
+public class Size {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = false)
-    private Long voucherId;
-
-    @Column(nullable = false, unique = false)
-    private Long brandId;
-
+    private String name; // "S", "M", "L", "XL", "XXL", "XXXL"
 }
