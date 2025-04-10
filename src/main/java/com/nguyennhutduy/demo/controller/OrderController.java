@@ -13,78 +13,78 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nguyennhutduy.demo.entity.Product;
-import com.nguyennhutduy.demo.service.ProductService;
+import com.nguyennhutduy.demo.entity.Order;
+import com.nguyennhutduy.demo.service.OrderService;
 
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("api/products")
+@RequestMapping("api/orders")
 @RequiredArgsConstructor
-public class ProductController {
-    private final ProductService productService;
+public class OrderController {
+    private final OrderService orderService;
 
-    // Create Product
-    // http://localhost:8081/api/products
+    // Create Order
+    // http://localhost:8081/api/orders
     @PostMapping
-    public ResponseEntity<?> createProduct(@RequestBody Product product) {
+    public ResponseEntity<?> createOrder(@RequestBody Order order) {
         try {
-            Product savedProduct = productService.createProduct(product);
-            return ResponseEntity.status(HttpStatus.CREATED).body(savedProduct);
+            Order savedOrder = orderService.createOrder(order);
+            return ResponseEntity.status(HttpStatus.CREATED).body(savedOrder);
         } catch (Exception ex) {
             ex.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("error: " + ex.getMessage());
         }
     }
 
-    // Get Product by ID
-    // http://localhost:8081/api/products/{id}
+    // Get Order by ID
+    // http://localhost:8081/api/orders/{id}
     @GetMapping("{id}")
-    public ResponseEntity<?> getProductById(@PathVariable("id") Long productId) {
+    public ResponseEntity<?> getOrderById(@PathVariable("id") Long orderId) {
         try {
-            Product product = productService.getProductById(productId);
-            return ResponseEntity.ok(product);
+            Order order = orderService.getOrderById(orderId);
+            return ResponseEntity.ok(order);
         } catch (Exception ex) {
             ex.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("error: " + ex.getMessage());
         }
     }
 
-    // Get All Products
-    // http://localhost:8081/api/products/
+    // Get All Orders
+    // http://localhost:8081/api/orders/
     @GetMapping
-    public ResponseEntity<?> getAllProduct() {
+    public ResponseEntity<?> getAllOrder() {
         try {
-            List<Product> products = productService.getAllProduct();
-            return ResponseEntity.ok(products);
+            List<Order> orders = orderService.getAllOrder();
+            return ResponseEntity.ok(orders);
         } catch (Exception ex) {
             ex.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("error: " + ex.getMessage());
         }
     }
 
-    // Update Product
-    // http://localhost:8081/api/products/{id}
+    // Update Order
+    // http://localhost:8081/api/orders/{id}
     @PutMapping("{id}")
-    public ResponseEntity<?> updateProduct(@PathVariable("id") Long productId,
-            @RequestBody Product product) {
+    public ResponseEntity<?> updateOrder(@PathVariable("id") Long orderId,
+            @RequestBody Order order) {
         try {
-            product.setId(productId);
-            Product updatedProduct = productService.updateProduct(product);
-            return ResponseEntity.ok(updatedProduct);
+            order.setId(orderId);
+            Order updatedOrder = orderService.updateOrder(order);
+            return ResponseEntity.ok(updatedOrder);
         } catch (Exception ex) {
             ex.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("error: " + ex.getMessage());
         }
     }
 
-    // Delete Product
-    // http://localhost:8081/api/products/
+    // Delete Order
+    // http://localhost:8081/api/orders/
     @DeleteMapping("{id}")
-    public ResponseEntity<String> deleteProduct(@PathVariable("id") Long productId) {
+    public ResponseEntity<String> deleteOrder(@PathVariable("id") Long orderId) {
         try {
-            productService.deleteProduct(productId);
-            return ResponseEntity.ok("Product successfully deleted!");
+            orderService.deleteOrder(orderId);
+            return ResponseEntity.ok("Order successfully deleted!");
         } catch (Exception ex) {
             ex.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("error: " + ex.getMessage());

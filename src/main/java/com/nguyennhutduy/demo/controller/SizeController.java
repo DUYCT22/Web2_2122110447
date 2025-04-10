@@ -13,78 +13,78 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nguyennhutduy.demo.entity.Product;
-import com.nguyennhutduy.demo.service.ProductService;
+import com.nguyennhutduy.demo.entity.Size;
+import com.nguyennhutduy.demo.service.SizeService;
 
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("api/products")
+@RequestMapping("api/sizes")
 @RequiredArgsConstructor
-public class ProductController {
-    private final ProductService productService;
+public class SizeController {
+    private final SizeService sizeService;
 
-    // Create Product
-    // http://localhost:8081/api/products
+    // Create Size
+    // http://localhost:8081/api/sizes
     @PostMapping
-    public ResponseEntity<?> createProduct(@RequestBody Product product) {
+    public ResponseEntity<?> createSize(@RequestBody Size size) {
         try {
-            Product savedProduct = productService.createProduct(product);
-            return ResponseEntity.status(HttpStatus.CREATED).body(savedProduct);
+            Size savedSize = sizeService.createSize(size);
+            return ResponseEntity.status(HttpStatus.CREATED).body(savedSize);
         } catch (Exception ex) {
             ex.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("error: " + ex.getMessage());
         }
     }
 
-    // Get Product by ID
-    // http://localhost:8081/api/products/{id}
+    // Get Size by ID
+    // http://localhost:8081/api/sizes/{id}
     @GetMapping("{id}")
-    public ResponseEntity<?> getProductById(@PathVariable("id") Long productId) {
+    public ResponseEntity<?> getSizeById(@PathVariable("id") Long sizeId) {
         try {
-            Product product = productService.getProductById(productId);
-            return ResponseEntity.ok(product);
+            Size size = sizeService.getSizeById(sizeId);
+            return ResponseEntity.ok(size);
         } catch (Exception ex) {
             ex.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("error: " + ex.getMessage());
         }
     }
 
-    // Get All Products
-    // http://localhost:8081/api/products/
+    // Get All Sizes
+    // http://localhost:8081/api/sizes/
     @GetMapping
-    public ResponseEntity<?> getAllProduct() {
+    public ResponseEntity<?> getAllSize() {
         try {
-            List<Product> products = productService.getAllProduct();
-            return ResponseEntity.ok(products);
+            List<Size> sizes = sizeService.getAllSize();
+            return ResponseEntity.ok(sizes);
         } catch (Exception ex) {
             ex.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("error: " + ex.getMessage());
         }
     }
 
-    // Update Product
-    // http://localhost:8081/api/products/{id}
+    // Update Size
+    // http://localhost:8081/api/sizes/{id}
     @PutMapping("{id}")
-    public ResponseEntity<?> updateProduct(@PathVariable("id") Long productId,
-            @RequestBody Product product) {
+    public ResponseEntity<?> updateSize(@PathVariable("id") Long sizeId,
+            @RequestBody Size size) {
         try {
-            product.setId(productId);
-            Product updatedProduct = productService.updateProduct(product);
-            return ResponseEntity.ok(updatedProduct);
+            size.setId(sizeId);
+            Size updatedSize = sizeService.updateSize(size);
+            return ResponseEntity.ok(updatedSize);
         } catch (Exception ex) {
             ex.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("error: " + ex.getMessage());
         }
     }
 
-    // Delete Product
-    // http://localhost:8081/api/products/
+    // Delete Size
+    // http://localhost:8081/api/sizes/
     @DeleteMapping("{id}")
-    public ResponseEntity<String> deleteProduct(@PathVariable("id") Long productId) {
+    public ResponseEntity<String> deleteSize(@PathVariable("id") Long sizeId) {
         try {
-            productService.deleteProduct(productId);
-            return ResponseEntity.ok("Product successfully deleted!");
+            sizeService.deleteSize(sizeId);
+            return ResponseEntity.ok("Size successfully deleted!");
         } catch (Exception ex) {
             ex.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("error: " + ex.getMessage());

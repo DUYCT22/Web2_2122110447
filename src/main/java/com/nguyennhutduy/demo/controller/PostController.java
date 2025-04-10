@@ -13,78 +13,78 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nguyennhutduy.demo.entity.Product;
-import com.nguyennhutduy.demo.service.ProductService;
+import com.nguyennhutduy.demo.entity.Post;
+import com.nguyennhutduy.demo.service.PostService;
 
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("api/products")
+@RequestMapping("api/posts")
 @RequiredArgsConstructor
-public class ProductController {
-    private final ProductService productService;
+public class PostController {
+    private final PostService postService;
 
-    // Create Product
-    // http://localhost:8081/api/products
+    // Create Post
+    // http://localhost:8081/api/posts
     @PostMapping
-    public ResponseEntity<?> createProduct(@RequestBody Product product) {
+    public ResponseEntity<?> createPost(@RequestBody Post post) {
         try {
-            Product savedProduct = productService.createProduct(product);
-            return ResponseEntity.status(HttpStatus.CREATED).body(savedProduct);
+            Post savedPost = postService.createPost(post);
+            return ResponseEntity.status(HttpStatus.CREATED).body(savedPost);
         } catch (Exception ex) {
             ex.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("error: " + ex.getMessage());
         }
     }
 
-    // Get Product by ID
-    // http://localhost:8081/api/products/{id}
+    // Get Post by ID
+    // http://localhost:8081/api/posts/{id}
     @GetMapping("{id}")
-    public ResponseEntity<?> getProductById(@PathVariable("id") Long productId) {
+    public ResponseEntity<?> getPostById(@PathVariable("id") Long postId) {
         try {
-            Product product = productService.getProductById(productId);
-            return ResponseEntity.ok(product);
+            Post post = postService.getPostById(postId);
+            return ResponseEntity.ok(post);
         } catch (Exception ex) {
             ex.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("error: " + ex.getMessage());
         }
     }
 
-    // Get All Products
-    // http://localhost:8081/api/products/
+    // Get All Posts
+    // http://localhost:8081/api/posts/
     @GetMapping
-    public ResponseEntity<?> getAllProduct() {
+    public ResponseEntity<?> getAllPost() {
         try {
-            List<Product> products = productService.getAllProduct();
-            return ResponseEntity.ok(products);
+            List<Post> posts = postService.getAllPost();
+            return ResponseEntity.ok(posts);
         } catch (Exception ex) {
             ex.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("error: " + ex.getMessage());
         }
     }
 
-    // Update Product
-    // http://localhost:8081/api/products/{id}
+    // Update Post
+    // http://localhost:8081/api/posts/{id}
     @PutMapping("{id}")
-    public ResponseEntity<?> updateProduct(@PathVariable("id") Long productId,
-            @RequestBody Product product) {
+    public ResponseEntity<?> updatePost(@PathVariable("id") Long postId,
+            @RequestBody Post post) {
         try {
-            product.setId(productId);
-            Product updatedProduct = productService.updateProduct(product);
-            return ResponseEntity.ok(updatedProduct);
+            post.setId(postId);
+            Post updatedPost = postService.updatePost(post);
+            return ResponseEntity.ok(updatedPost);
         } catch (Exception ex) {
             ex.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("error: " + ex.getMessage());
         }
     }
 
-    // Delete Product
-    // http://localhost:8081/api/products/
+    // Delete Post
+    // http://localhost:8081/api/posts/
     @DeleteMapping("{id}")
-    public ResponseEntity<String> deleteProduct(@PathVariable("id") Long productId) {
+    public ResponseEntity<String> deletePost(@PathVariable("id") Long postId) {
         try {
-            productService.deleteProduct(productId);
-            return ResponseEntity.ok("Product successfully deleted!");
+            postService.deletePost(postId);
+            return ResponseEntity.ok("Post successfully deleted!");
         } catch (Exception ex) {
             ex.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("error: " + ex.getMessage());
