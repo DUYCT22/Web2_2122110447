@@ -1,6 +1,9 @@
 package com.nguyennhutduy.demo.entity;
 
 import java.time.LocalDate;
+import java.util.Collection;
+
+import org.springframework.security.core.GrantedAuthority;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -29,6 +32,9 @@ public class User {
     private int role;
 
     @Column(nullable = false, unique = false)
+    private String name;
+
+    @Column(nullable = true, unique = false)
     private String image;
 
     @Column(nullable = false, unique = false)
