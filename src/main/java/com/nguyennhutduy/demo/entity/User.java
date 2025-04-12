@@ -1,9 +1,6 @@
 package com.nguyennhutduy.demo.entity;
 
 import java.time.LocalDate;
-import java.util.Collection;
-
-import org.springframework.security.core.GrantedAuthority;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
