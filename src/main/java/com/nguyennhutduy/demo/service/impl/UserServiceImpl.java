@@ -37,9 +37,6 @@ public class UserServiceImpl implements UserService {
     public User updateUser(User user) {
         User existingUser = userRepository.findById(user.getId())
                 .orElseThrow(() -> new RuntimeException("User not found"));
-        if (user.getRole() != 0 && user.getRole() != existingUser.getRole()) {
-            existingUser.setRole(user.getRole());
-        }
         if (user.getName() != null && !user.getName().equals(existingUser.getName())) {
             existingUser.setName(user.getName());
         }
