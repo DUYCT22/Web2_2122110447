@@ -27,9 +27,22 @@ public class CategoryController {
     // Create Category
     // http://localhost:8081/api/categories
     @PostMapping
-    public ResponseEntity<?> createBrand(@RequestBody Category category) {
+    public ResponseEntity<?> createCategory(@RequestBody Category category) {
         try {
             Category savedCategory = categoryService.createCategory(category);
+            return ResponseEntity.status(HttpStatus.CREATED).body(savedCategory);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("error: " + ex.getMessage());
+        }
+    }
+
+    // Create List Categories
+    // http://localhost:8081/api/categories/list
+    @PostMapping("/list")
+    public ResponseEntity<?> createListCategory(@RequestBody List<Category> category) {
+        try {
+            List<Category> savedCategory = categoryService.createListCategory(category);
             return ResponseEntity.status(HttpStatus.CREATED).body(savedCategory);
         } catch (Exception ex) {
             ex.printStackTrace();

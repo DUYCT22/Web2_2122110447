@@ -7,6 +7,8 @@ import com.nguyennhutduy.demo.entity.Size;
 public interface SizeService {
     Size createSize(Size size);
 
+    List<Size> createListSize(List<Size> size);
+
     Size getSizeById(Long sizeId);
 
     List<Size> getAllSize();

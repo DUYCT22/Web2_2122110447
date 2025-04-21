@@ -54,4 +54,9 @@ public class ProductImageServiceImple implements ProductImageService {
         productImagesRepository.deleteById(productImageId);
     }
 
+    @Override
+    public List<ProductImages> createListProductImage(List<ProductImages> productImage) {
+        return productImagesRepository.saveAll(productImage);
+    }
+
 }

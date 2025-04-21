@@ -61,4 +61,9 @@ public class PostServiceImpl implements PostService {
         postRepository.deleteById(postId);
     }
 
+    @Override
+    public List<Post> createListPost(List<Post> post) {
+        return postRepository.saveAll(post);
+    }
+
 }

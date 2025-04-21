@@ -7,6 +7,8 @@ import com.nguyennhutduy.demo.entity.OrderDetail;
 public interface OrderDetailService {
     OrderDetail createOrderDetail(OrderDetail orderDetail);
 
+    List<OrderDetail> createListOrderDetail(List<OrderDetail> orderDetail);
+
     OrderDetail getOrderDetailById(Long orderDetailId);
 
     List<OrderDetail> getAllOrderDetail();

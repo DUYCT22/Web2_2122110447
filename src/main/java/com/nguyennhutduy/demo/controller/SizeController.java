@@ -37,6 +37,19 @@ public class SizeController {
         }
     }
 
+    // Create List Size
+    // http://localhost:8081/api/sizes/list
+    @PostMapping("/list")
+    public ResponseEntity<?> createListSize(@RequestBody List<Size> size) {
+        try {
+            List<Size> savedSize = sizeService.createListSize(size);
+            return ResponseEntity.status(HttpStatus.CREATED).body(savedSize);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("error: " + ex.getMessage());
+        }
+    }
+
     // Get Size by ID
     // http://localhost:8081/api/sizes/{id}
     @GetMapping("{id}")

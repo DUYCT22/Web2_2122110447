@@ -37,6 +37,19 @@ public class ProductImageController {
         }
     }
 
+    // Create List ProductImage
+    // http://localhost:8081/api/productImages/list
+    @PostMapping("/list")
+    public ResponseEntity<?> createListProductImage(@RequestBody List<ProductImages> productImage) {
+        try {
+            List<ProductImages> savedProductImage = productImageService.createListProductImage(productImage);
+            return ResponseEntity.status(HttpStatus.CREATED).body(savedProductImage);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("error: " + ex.getMessage());
+        }
+    }
+
     // Get ProductImage by ID
     // http://localhost:8081/api/productImages/{id}
     @GetMapping("{id}")

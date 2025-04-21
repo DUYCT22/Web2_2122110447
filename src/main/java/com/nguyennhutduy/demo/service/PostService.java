@@ -7,6 +7,8 @@ import com.nguyennhutduy.demo.entity.Post;
 public interface PostService {
     Post createPost(Post post);
 
+    List<Post> createListPost(List<Post> post);
+
     Post getPostById(Long postId);
 
     List<Post> getAllPost();

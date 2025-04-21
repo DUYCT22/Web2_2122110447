@@ -37,6 +37,19 @@ public class PostController {
         }
     }
 
+    // Create List Post
+    // http://localhost:8081/api/posts/list
+    @PostMapping("/list")
+    public ResponseEntity<?> createListPost(@RequestBody List<Post> post) {
+        try {
+            List<Post> savedPost = postService.createListPost(post);
+            return ResponseEntity.status(HttpStatus.CREATED).body(savedPost);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("error: " + ex.getMessage());
+        }
+    }
+
     // Get Post by ID
     // http://localhost:8081/api/posts/{id}
     @GetMapping("{id}")

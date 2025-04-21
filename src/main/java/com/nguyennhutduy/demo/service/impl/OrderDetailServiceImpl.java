@@ -54,4 +54,9 @@ public class OrderDetailServiceImpl implements OrderDetailService {
         orderDetailRepository.deleteById(orderDetailId);
     }
 
+    @Override
+    public List<OrderDetail> createListOrderDetail(List<OrderDetail> orderDetail) {
+        return orderDetailRepository.saveAll(orderDetail);
+    }
+
 }

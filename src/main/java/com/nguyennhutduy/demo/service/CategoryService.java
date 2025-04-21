@@ -7,6 +7,8 @@ import com.nguyennhutduy.demo.entity.Category;
 public interface CategoryService {
     Category createCategory(Category category);
 
+    List<Category> createListCategory(List<Category> category);
+
     Category getCategoryById(Long categoryId);
 
     List<Category> getAllCategory();

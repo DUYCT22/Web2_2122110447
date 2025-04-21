@@ -37,6 +37,19 @@ public class ProductController {
         }
     }
 
+    // Create List Product
+    // http://localhost:8081/api/products/list
+    @PostMapping("/list")
+    public ResponseEntity<?> createListProduct(@RequestBody List<Product> product) {
+        try {
+            List<Product> savedProduct = productService.createListProduct(product);
+            return ResponseEntity.status(HttpStatus.CREATED).body(savedProduct);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("error: " + ex.getMessage());
+        }
+    }
+
     // Get Product by ID
     // http://localhost:8081/api/products/{id}
     @GetMapping("{id}")

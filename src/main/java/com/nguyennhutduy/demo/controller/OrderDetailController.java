@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.nguyennhutduy.demo.entity.Category;
 import com.nguyennhutduy.demo.entity.OrderDetail;
 import com.nguyennhutduy.demo.service.OrderDetailService;
 
@@ -30,6 +31,19 @@ public class OrderDetailController {
     public ResponseEntity<?> createOrderDetail(@RequestBody OrderDetail orderDetail) {
         try {
             OrderDetail savedOrderDetail = orderDetailService.createOrderDetail(orderDetail);
+            return ResponseEntity.status(HttpStatus.CREATED).body(savedOrderDetail);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("error: " + ex.getMessage());
+        }
+    }
+
+    // Create List OrderDetail
+    // http://localhost:8081/api/orderdetails/list
+    @PostMapping("/list")
+    public ResponseEntity<?> createListOrderDetail(@RequestBody List<OrderDetail> orderDetail) {
+        try {
+            List<OrderDetail> savedOrderDetail = orderDetailService.createListOrderDetail(orderDetail);
             return ResponseEntity.status(HttpStatus.CREATED).body(savedOrderDetail);
         } catch (Exception ex) {
             ex.printStackTrace();
