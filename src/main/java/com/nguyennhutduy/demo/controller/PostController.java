@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nguyennhutduy.demo.entity.Post;
+import com.nguyennhutduy.demo.repository.PostRepository;
 import com.nguyennhutduy.demo.service.PostService;
 
 import lombok.RequiredArgsConstructor;
@@ -23,6 +25,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class PostController {
     private final PostService postService;
+    private final PostRepository postRepository;
 
     // Create Post
     // http://localhost:8081/api/posts

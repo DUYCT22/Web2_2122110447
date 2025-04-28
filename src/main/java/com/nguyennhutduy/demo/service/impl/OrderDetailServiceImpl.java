@@ -59,4 +59,9 @@ public class OrderDetailServiceImpl implements OrderDetailService {
         return orderDetailRepository.saveAll(orderDetail);
     }
 
+    @Override
+    public List<OrderDetail> getOrderDetailsByOrderId(Long orderId) {
+        return orderDetailRepository.findByOrderId(orderId);
+    }
+
 }

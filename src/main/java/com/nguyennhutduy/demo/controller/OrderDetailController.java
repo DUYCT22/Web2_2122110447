@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nguyennhutduy.demo.entity.Category;
 import com.nguyennhutduy.demo.entity.OrderDetail;
 import com.nguyennhutduy.demo.service.OrderDetailService;
 
@@ -62,6 +61,14 @@ public class OrderDetailController {
             ex.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("error: " + ex.getMessage());
         }
+    }
+
+    // Get OrderDetail by OrderId
+    // http://localhost:8081/api/orderdetails/order/{id}
+    @GetMapping("/order/{id}")
+    public ResponseEntity<List<OrderDetail>> getOrderDetailsByOrderId(@PathVariable("id") Long orderId) {
+        List<OrderDetail> details = orderDetailService.getOrderDetailsByOrderId(orderId);
+        return ResponseEntity.ok(details);
     }
 
     // Get All OrderDetails

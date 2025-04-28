@@ -11,6 +11,8 @@ public interface OrderDetailService {
 
     OrderDetail getOrderDetailById(Long orderDetailId);
 
+    List<OrderDetail> getOrderDetailsByOrderId(Long orderId);
+
     List<OrderDetail> getAllOrderDetail();
 
     OrderDetail updateOrderDetail(OrderDetail orderDetail);

@@ -5,19 +5,29 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.nguyennhutduy.demo.entity.Post;
+import com.nguyennhutduy.demo.entity.Topic;
 import com.nguyennhutduy.demo.repository.PostRepository;
+import com.nguyennhutduy.demo.repository.TopicRepository;
 import com.nguyennhutduy.demo.service.PostService;
 
 @Service
 public class PostServiceImpl implements PostService {
     private final PostRepository postRepository;
 
-    public PostServiceImpl(PostRepository postRepository) {
+    private final TopicRepository topicRepository;
+
+    public PostServiceImpl(PostRepository postRepository, TopicRepository topicRepository) {
         this.postRepository = postRepository;
+        this.topicRepository = topicRepository;
     }
 
     @Override
     public Post createPost(Post post) {
+        Long topicId = post.getTopic().getId();
+        Topic topic = topicRepository.findById(topicId)
+                .orElseThrow(() -> new RuntimeException("Topic with ID " + topicId + " not found"));
+
+        post.setTopic(topic);
         return postRepository.save(post);
     }
 

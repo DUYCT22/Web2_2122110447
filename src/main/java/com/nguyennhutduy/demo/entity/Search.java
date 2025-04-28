@@ -24,7 +24,7 @@ public class Search {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = false)
     private String keyword;
 
     @ManyToOne
